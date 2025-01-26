@@ -2,8 +2,8 @@
 
 ## Stack
 
-- Node v16
-- TypeScript
+- Python 3
+- Slack Bolt for Python
 
 ## Requirements
 
@@ -12,25 +12,67 @@ Generate every necessary token which requires the bot which can be found here [.
 
 To generate them, you can follow the documentation [Access tokens](https://api.slack.com/authentication/token-types).
 
+### Permissions
+
+#### Socket mode
+
+You need to enabled Socket Mode and accept:
+- `Interactivity & Shortcuts`
+- `Slash Commands`
+
+### Slash Commands
+
+Create a slash command named:
+
+- `/random-lunch`
+
+#### App-Level Tokens
+
+Scopes:
+
+- `connections:write`
+
+#### Bot Token Scopes
+
+Scopes:
+
+- `chat:write`
+- `chat:write:public`
+- `commands`
+
 ### Environment variables
 
-Fill the `.env` file or export the required environment variables before running the app.
+Create a `.env` file from the `.env.dist` and fill it before running the app.
 
-## Installation
+## Development
+### Installation
 
-Building the dev environment:
+Create a virtualenv:
 
 ```sh
-docker-compose up
+python -m venv .venv
 ```
 
-> `-d` for detach mode
+Activate it:
 
-## Running the application
+```sh
+source .venv/bin/activate
+```
 
+Install packages:
+
+```sh
+pip install -r requirements.txt
+```
+
+### Running the application
 
 Run the command:
 
 ```sh
-docker-compose exec app npm start
+python src/app.py
 ```
+
+## Interaction
+
+You can use the command `/random-lunch` to get a restaurant suggestion.

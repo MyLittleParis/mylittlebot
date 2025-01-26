@@ -1,9 +1,11 @@
-FROM node:16-buster
+FROM python:3
 
-WORKDIR /var/opt/app
+WORKDIR /var/www/app
 
-EXPOSE 3000
+COPY requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD npm install && npm run watch
+CMD python src/app.py

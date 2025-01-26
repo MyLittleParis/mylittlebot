@@ -1,3 +1,5 @@
+// TODO: reimplement in Python
+
 "user strict";
 
 import path = require("path");
