@@ -1,6 +1,6 @@
 from random import randint
 
-restaurants: list = [
+restaurants: list[dict[str, object]] = [
     {
         "type": "section",
         "text": {
@@ -28,7 +28,7 @@ restaurants: list = [
 ]
 
 
-def suggest_lunch(user_id: str) -> list:
+def suggest_lunch(user_id: str) -> list[dict[str, object]]:
     return [
         {
             "type": "section",

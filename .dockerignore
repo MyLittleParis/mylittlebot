@@ -1,0 +1,7 @@
+config/google/**
+dist
+.vscode
+.idea
+.venv
+__pycache__
+

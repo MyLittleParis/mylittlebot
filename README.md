@@ -45,7 +45,15 @@ Scopes:
 Create a `.env` file from the `.env.dist` and fill it before running the app.
 
 ## Development
-### Installation
+
+### Running with Docker
+
+```sh
+docker compose watch
+```
+
+### Running Locally
+#### Installation
 
 Create a virtualenv:
 
@@ -65,7 +73,7 @@ Install packages:
 pip install -r requirements.txt
 ```
 
-### Running the application
+#### Running the application
 
 Run the command:
 
@@ -76,3 +84,4 @@ python src/app.py
 ## Interaction
 
 You can use the command `/random-lunch` to get a restaurant suggestion.
+

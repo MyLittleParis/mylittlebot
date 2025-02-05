@@ -5,5 +5,12 @@ services:
       dockerfile: provisioning/dev/Dockerfile
     image: random_lunch
     container_name: random_lunch_app
-    volumes:
-      - ./:/var/www/app
+    # volumes:
+    #   - ./:/var/www/app
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /var/www/app
+        - action: rebuild
+          path: requirements.txt
