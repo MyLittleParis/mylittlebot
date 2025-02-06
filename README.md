@@ -10,7 +10,9 @@
 ### Access Tokens
 Generate every necessary token which requires the bot which can be found here [.env.dist](./.env.dist).
 
-To generate them, you can follow the documentation [Access tokens](https://api.slack.com/authentication/token-types).
+To generate them, you can follow the documentation [Slack Access tokens](https://api.slack.com/authentication/token-types).
+
+For Google Maps, please refer to the related documentation https://developers.google.com/maps/documentation/places/web-service/cloud-setup#console
 
 ### Permissions
 

@@ -3,6 +3,7 @@ from dotenv import dotenv_values
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
+
 from google import GMaps
 from suggestion import suggest_lunch
 
@@ -47,13 +48,14 @@ def on_suggest_action(body, ack, say) -> None:
 
 
 if __name__ == "__main__":
-    SocketModeHandler(app, app_token).start()
-
     mlp_location_lat = env.get("MLP_LOCATION_LAT") or "1"
     mlp_location_long = env.get("MLP_LOCATION_LONG") or "1"
+    google_place_key = env.get("GOOGLE_PLACES_API_KEY") or "test"
 
-    gmaps = GMaps(client_key="test")
-    nearby_restaurants = gmaps.get_nearby_restaurants(int(mlp_location_lat), int(mlp_location_long))
+    # gmaps = GMaps(client_key=google_place_key)
+    # nearby_restaurants = gmaps.get_nearby_restaurants(float(mlp_location_lat), float(mlp_location_long))
 
-    print(nearby_restaurants)
+    # print(nearby_restaurants)
+
+    SocketModeHandler(app, app_token).start()
 
