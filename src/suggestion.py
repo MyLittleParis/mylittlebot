@@ -1,4 +1,8 @@
+import logging
 from random import randint
+import os
+
+logger = logging.getLogger(f"random_lunch.{__name__}")
 
 restaurants: list[dict[str, object]] = [
     {
@@ -29,6 +33,10 @@ restaurants: list[dict[str, object]] = [
 
 
 def suggest_lunch(user_id: str) -> list[dict[str, object]]:
+    random_index = randint(0, len(restaurants) - 1)
+
+    logger.info(f"Restaurant #{random_index} has been randomly chosen.")
+
     return [
         {
             "type": "section",
@@ -37,7 +45,7 @@ def suggest_lunch(user_id: str) -> list[dict[str, object]]:
         {
             "type": "divider"
         },
-        restaurants[randint(0, len(restaurants) - 1)],
+        restaurants[random_index],
         {
             "type": "divider"
         },
