@@ -1,6 +1,5 @@
 import logging
 from random import randint
-import os
 
 logger = logging.getLogger(f"random_lunch.{__name__}")
 
@@ -78,3 +77,5 @@ def suggest_lunch(user_id: str) -> list[dict[str, object]]:
             ]
         }
     ]
+
+__all__ = ["suggest_lunch"]

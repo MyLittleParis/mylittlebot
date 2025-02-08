@@ -4,7 +4,7 @@ import os
 import json
 
 
-class GMaps:
+class Maps:
     """Class to work with Gmaps"""
     gmaps: googlemaps.Client
 

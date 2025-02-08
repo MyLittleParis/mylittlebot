@@ -5,7 +5,6 @@ from dotenv import dotenv_values
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-from google import GMaps
 from suggestion import suggest_lunch
 
 log_file_path =os.path.join(os.getcwd(), "var", "log", "dev.log")
@@ -65,7 +64,4 @@ def on_suggest_action(body, ack, say) -> None:
 
 
 if __name__ == "__main__":
-    gmaps = GMaps(client_key=google_place_key)
-    gmaps.get_nearby_restaurants(lat=float(mlp_location_lat), long=float(mlp_location_long))
-
     SocketModeHandler(app, app_token).start()
