@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Python CI
 
 on:
   pull_request:
@@ -16,28 +16,26 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        python-version: [3.x]
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
         with:
-          node-version: "${{ matrix.node-version }}"
+          python-version: "${{ matrix.python-version }}"
 
-      - name: Get Npm cache directory
-        id: npm-cache
-        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+      - name: Get pip cache directory
+        id: pip-cache
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache Npm
-        uses: actions/cache@v3
+      - name: Cache pip
+        uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-v0-${{ hashFiles('package-lock.json') }}
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-v0-${{ hashFiles('requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-node-v0-
+            ${{ runner.os }}-pip-v0-
 
-      - run: npm install
-      - run: npm run lint
-      - run: npm run build
+      - run: pip install -r requirements.txt

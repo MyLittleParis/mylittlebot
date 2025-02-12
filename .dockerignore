@@ -1,9 +1,7 @@
-# git ignore
 config/google/**
 dist
-.env
 .vscode
 .idea
 .venv
 __pycache__
-var
+

@@ -1,0 +1,9 @@
+certifi==2025.1.31
+charset-normalizer==3.4.1
+googlemaps==4.10.0
+idna==3.10
+python-dotenv==1.0.1
+requests==2.32.3
+slack_bolt==1.22.0
+slack_sdk==3.34.0
+urllib3==2.3.0

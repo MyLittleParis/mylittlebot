@@ -1,9 +1,15 @@
-FROM node:16-buster
+FROM python:3
 
-WORKDIR /var/opt/app
+RUN useradd -ms /bin/sh -u 1001 app
 
-EXPOSE 3000
+USER app
 
-COPY . .
+WORKDIR /var/www/app
 
-CMD npm install && npm run watch
+COPY requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY --chown=app:app . .
+
+CMD python src/app.py
