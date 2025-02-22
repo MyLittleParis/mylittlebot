@@ -3,12 +3,20 @@ import googlemaps
 import os
 import json
 
+from dotenv import dotenv_values
+
 
 class Maps:
     """Class to work with Gmaps"""
     gmaps: googlemaps.Client
 
-    def __init__(self, client_key: str) -> None:
+    def __init__(self) -> None:
+        env = dotenv_values(Path.cwd().joinpath(".env"))
+        client_key = env.get("GOOGLE_PLACES_API_KEY") or None
+
+        if client_key is None:
+            raise EnvironmentError("Missing \"GOOGLE_PLACES_API_KEY\" in .env file")
+
         self.gmaps = googlemaps.Client(key=client_key)
 
     def get_nearby_restaurants(self, lat: float, long: float) -> dict:
@@ -50,7 +58,7 @@ class Maps:
 
             return json.loads(content)
 
-    def _save_places_in_file(self, places: dict) -> dict or None:
+    def _save_places_in_file(self, places: dict) -> None:
         places_file_path = os.path.join(os.getcwd(), "var", "cache", "places.json")
 
         mode = "x+"
