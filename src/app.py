@@ -2,7 +2,7 @@ import logging
 import os.path
 from pathlib import Path
 from dotenv import dotenv_values
-from slack_bolt import App
+from slack_bolt import App, Ack, Respond, Say
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 from suggestion import suggest_lunch
@@ -29,7 +29,6 @@ app_token = env.get("SLACK_APP_TOKEN")
 verification_token = env.get("SLACK_VERIFICATION_TOKEN")
 mlp_location_lat = env.get("MLP_LOCATION_LAT") or "1"
 mlp_location_long = env.get("MLP_LOCATION_LONG") or "1"
-google_place_key = env.get("GOOGLE_PLACES_API_KEY") or "test"
 
 app = App(
     token=bot_token,
@@ -38,27 +37,27 @@ app = App(
 )
 
 @app.command("/random-lunch")
-def on_suggest_lunch(ack, respond, command) -> None:
+def on_suggest_lunch(ack: Ack, respond: Respond, command) -> None:
     ack()
     respond(
-        blocks=suggest_lunch(command["user_id"])
+        blocks=suggest_lunch(float(mlp_location_lat), float(mlp_location_long), command["user_id"])
     )
 
 
 @app.action("suggest_action")
-def on_suggest_action(body, ack, say) -> None:
+def on_suggest_action(body, ack: Ack, say: Say) -> None:
     ack()
-    say(blocks=suggest_lunch(body['user']['id']))
+    say(blocks=suggest_lunch(float(mlp_location_lat), float(mlp_location_long), body['user']['id']))
 
 
 @app.action("yes_action")
-def on_suggest_action(body, ack, say) -> None:
+def on_suggest_action(body, ack: Ack, say: Say) -> None:
     ack()
     say(f"<@{body['user']['id']}> accepts!")
 
 
 @app.action("no_action")
-def on_suggest_action(body, ack, say) -> None:
+def on_suggest_action(body, ack: Ack, say: Say) -> None:
     ack()
     say(f"<@{body['user']['id']}> refuses!")
 

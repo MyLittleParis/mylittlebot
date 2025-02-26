@@ -1,3 +1,3 @@
-from maps import Maps
+from .maps import Maps
 
 __all__ = [ "Maps" ]
